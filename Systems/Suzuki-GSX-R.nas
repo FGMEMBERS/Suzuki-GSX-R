@@ -222,3 +222,61 @@ setlistener("sim/model/start-idling", func()
    		interpolate("/controls/Suzuki-GSX-R/driver-up", 0, 0.8);
    }
   }, 1, 0);
+  
+ #--------------------- Replace bike after crash ----------------
+ setlistener("/devices/status/mice/mouse/button", func(b)
+  {
+  	var c = getprop("/sim/crashed") or 0;
+	var p = getprop("/devices/status/keyboard/event/key/pressed") or 0;
+	var k = getprop("/devices/status/keyboard/event/key") or 0;
+ 
+  if (!b.getBoolValue() and k == 109)
+   {
+   		setprop("/devices/status/keyboard/event/key",60); # overwrite the key event
+		var retrl = getprop("/Suzuki-GSX-R/race-lap") or 0;
+		var rets = getprop("/Suzuki-GSX-R/this-sector") or 0;
+		if(pa){
+			var ra = {};
+			var rn = 0;
+			if(size(sectors) > 0){
+				foreach(var s; sectors) {
+					var as = getprop("/Suzuki-GSX-R/reset-store/"~pa~"/sector["~rn~"]/start-time") or 0;	
+					ra[rn] = as;
+					if(rn > (size(sectors)-1)) { 
+						rn = 0;
+					}else{
+						rn += 1;
+					}			
+				}
+			}
+		} 
+		 
+		setprop("sim/current-view/view-number", 1);
+   		shutdown();
+		setprop("/sim/presets/latitude-deg",getprop("/sim/input/click/latitude-deg"));
+		setprop("/sim/presets/longitude-deg", getprop("/sim/input/click/longitude-deg"));
+		setprop("/sim/presets/altitude-ft", getprop("/sim/input/click/elevation-ft"));
+		setprop("/controls/gear/gear-down", 1);
+		setprop("/surface-positions/left-aileron-pos-norm", 0);
+		setprop("/surface-positions/right-aileron-pos-norm", 0);
+		setprop("sim/current-view/view-number", 0);
+		
+		fgcommand("reset");
+		
+		if(pa){
+			var rn = 0;
+			if(size(sectors) > 0){
+				settimer(func{
+					foreach(var s; keys (ra)) {
+						setprop("/Suzuki-GSX-R/"~pa~"/sector["~s~"]/start-time", ra[s]);		
+					}
+					find_marker();
+				}, 10.0);
+			}
+		}
+		setprop("/Suzuki-GSX-R/race-lap",retrl);
+		setprop("/Suzuki-GSX-R/this-sector",rets);
+		
+		help_win.write("Is everything ok with you?");
+   }
+  }, 1, 1);
