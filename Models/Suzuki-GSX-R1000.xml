@@ -27,6 +27,7 @@
 
   <animation>
     <type>material</type>
+    <object-name>RPM.btn</object-name>
     <object-name>carrd</object-name>
     <object-name>carrd01</object-name>
     <object-name>carrd03</object-name>
@@ -291,6 +292,7 @@
   <!-- right left -->
   <animation>
 	  <type>rotate</type>
+      <object-name>RPM.btn</object-name>
       <object-name>RPM</object-name>
       <object-name>SI</object-name>
       <object-name>SL</object-name>
@@ -359,6 +361,7 @@
     <!-- front fork -->
     <animation>
   	  <type>rotate</type>
+        <object-name>RPM.btn</object-name>
         <object-name>SL</object-name>
         <object-name>carrd05</object-name>
         <object-name>carrd06</object-name>
@@ -390,27 +393,30 @@
           <z2-m>  0.6766</z2-m>
         </axis>
       </animation>
-	  
+
+  	<animation>
+  	  <type>rotate</type>
+  	  <object-name>RPM.btn</object-name>
+  	  <property>engines/engine/rpm_regulation</property>
+        <factor>-5</factor>
+        <axis>
+          <x>  0 </x>
+          <y>  1 </y>
+          <z>  0 </z>
+        </axis>
+  	</animation>
+	
       <animation>
-          <type>translate</type>
-          <object-name>carrd05</object-name>
-          <object-name>ducdi</object-name>
-          <object-name>duce</object-name>
-          <object-name>ducm2</object-name>
-          <object-name>ducm4</object-name>
-          <object-name>ducp1</object-name>
-          <object-name>ducp2</object-name>
-          <object-name>ducw</object-name>
-          <property>sim/multiplay/generic/float[2]</property>
-          <factor>-0.08</factor>
-	          <axis>   
-	            <x1-m> -0.4961</x1-m>
-	            <y1-m>  0.0</y1-m>
-	            <z1-m>  0.9231</z1-m>
-	            <x2-m> -0.6059</x2-m>
-	            <y2-m>  0.00</y2-m>
-	            <z2-m>  0.6766</z2-m>
-	          </axis>
+          <type>pick</type>
+          <object-name>RPM.btn</object-name>
+  		<visible>true</visible>
+          <action>
+   	    <button>0</button>
+              <binding>	    
+  	    	  <command>property-toggle</command>
+  			  <property>engines/engine/rpm_regulation</property>	
+              </binding>           
+          </action>
       </animation>
 	  
 	  <!-- rear wheel suspension -->

@@ -81,7 +81,9 @@ setlistener("/controls/flight/aileron", func (position){
 		}
 		
 	}else{
-		setprop("/controls/flight/aileron-manual", position);
+		var np = math.round(position*position*position*100);
+		np = np/100;
+		interpolate("/controls/flight/aileron-manual", np,0.07);
 	}
 });
 

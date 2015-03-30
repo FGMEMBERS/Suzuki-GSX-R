@@ -165,6 +165,22 @@
   	      <halign>right</halign>
   	    </text>
   	  </group>
+
+  	  <group>
+  	    <layout>hbox</layout>
+  	    <text>
+  	      <label>Czech - Terlicko (LKMT) ..................................................................</label>
+  	      <halign>left</halign>
+  	    </text>
+  	    <input>
+  	      <property>/Suzuki-GSX-R/CT/race-laps</property>
+  	      <type>INTEGER</type>
+  	    </input>
+  	    <text>
+  	      <label>laps</label>
+  	      <halign>right</halign>
+  	    </text>
+  	  </group>
 	  
 	  <hrule/>
 	  

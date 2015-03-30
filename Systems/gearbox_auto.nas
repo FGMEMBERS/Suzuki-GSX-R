@@ -20,12 +20,13 @@ var lastthrottle = 0;
 var lastgear = 0;
 var lastrpm = 0;
 var engine_brake = props.globals.getNode("/engines/engine[0]/brake-engine");
+var engine_rpm_regulation = props.globals.getNode("/engines/engine[0]/rpm_regulation");
 var weight = props.globals.getNode("/sim/weight/weight-lb"); # max. 230 lbs
 var inertia = 0;
 var vmax = 0;
 var looptime = 0.1;
 var minrpm = 2200;
-var maxrpm = 17000;
+var maxrpm = 18500;
 var clutchrpm = 0;
 var maxhealth = 60; # for the engine killing, higher is longer live while overspeed rpm
 var speedlimiter = props.globals.getNode("/instrumentation/Suzuki-GSX-R/speed-indicator/speed-limiter");
@@ -140,6 +141,13 @@ var loop = func {
 			engine_brake.setValue(1);
 		}else{
 			engine_brake.setValue(0);
+		}
+
+		# Automatic RPM overspeed regulation
+		if(engine_rpm_regulation.getValue() == 1 and rpm.getValue() > maxrpm-500){
+			propulsion.setValue(0);
+			if (speed > 20) engine_brake.setValue(0.8);
+			rpm.setValue(maxrpm-800);
 		}
 		
 		# Anti - slip regulation ASR

@@ -108,6 +108,17 @@ var wp1cc = [-39.93776583,175.05011601,9.0,"Start/Finish"];
 # Ground Marker Position Heads Rd - lat,lon,alt in meter
 var wp2cc = [-39.93978927,175.04952614,7.0,"Heads Road"];
 
+##### Czech - Terlicko
+
+# Ground Marker Position Start/Finish - lat,lon,alt in meter
+var wp1ct = [49.75945182,18.48839585,283.0,"Start/Cil"];
+
+# Ground Marker Position Rondel - lat,lon,alt in meter
+var wp2ct = [49.76191355,18.46498641,337.0,"Rondel"];
+
+# Ground Marker Position Rondel - lat,lon,alt in meter
+var wp3ct = [49.77349913,18.48491256,314.0,"Sady"];
+
 var pa = "TT";
 var sectors = sectors_tt = [wp1tt, wp2tt, wp3tt, wp4tt, wp5tt, wp6tt];
 var sectors_s100 = [wp1s, wp2s, wp3s];
@@ -117,6 +128,7 @@ var sectors_mgp = [wp1mgp, wp2mgp, wp3mgp];
 var sectors_kal = [wp1kal, wp2kal, wp3kal];
 var sectors_hd = [wp1hd, wp2hd];
 var sectors_cc = [wp1cc, wp2cc];
+var sectors_ct = [wp1ct, wp2ct, wp3ct];
 
 ############################ helper for view ####################################
 var show_helper = func(s) {
@@ -316,6 +328,9 @@ var find_marker = func{
 	
 	marker_wp_pos.set_latlon(wp1cc[0], wp1cc[1]);
 	var dis_to_CC = marker_wp_pos.distance_to(mypos);
+	
+	marker_wp_pos.set_latlon(wp1ct[0], wp1ct[1], wp1ct[2]);
+	var dis_to_CT = marker_wp_pos.distance_to(mypos);
 		
 	if(dis_to_TT < 10000){   # if we are far away - 10km - from the Isle of Man stop script
 		#print("We are on the Isle of Man");
@@ -349,6 +364,10 @@ var find_marker = func{
 		#print("Wanganui - Cimetery Circuit - New Zealand");
 		sectors = sectors_cc;
 		pa = "CC";
+	}else if(dis_to_CT < 10000){
+		#print("Terlicko - Czech");
+		sectors = sectors_ct;
+		pa = "CT";
 	}
 
 	# newbies have red jackets
