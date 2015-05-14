@@ -5,7 +5,7 @@
 		This file is licenced under the terms of the GNU General Public Licence V2 or later
 		###################################################################################
 -->
-<airplane mass="900">
+<airplane mass="900" version="YASIM_VERSION_CURRENT">
 
   <approach speed="16" aoa="2" fuel="0.8">
     <control-setting axis="/controls/flight/elevator" value="0.15"/>
