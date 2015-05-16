@@ -70,7 +70,8 @@ var loop = func {
 		clutch.setValue(0);
 	}
 	
-	gspeed = getprop("/instrumentation/airspeed-indicator/indicated-speed-kt") or 0;
+	#gspeed = getprop("/instrumentation/airspeed-indicator/indicated-speed-kt") or 0;
+	gspeed = getprop("/velocities/groundspeed-kt") or 0;
 	
 	# drive with gears
 	# clutch control
