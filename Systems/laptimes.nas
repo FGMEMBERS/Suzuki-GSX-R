@@ -119,6 +119,14 @@ var wp2ct = [49.76191355,18.46498641,337.0,"Rondel"];
 # Ground Marker Position Rondel - lat,lon,alt in meter
 var wp3ct = [49.77349913,18.48491256,314.0,"Sady"];
 
+##### Germany - Bopfingen
+
+# Ground Marker Position Start/Finish - lat,lon,alt in meter
+var wp1bo = [48.85190347,10.33299092,614.0,"Start/Ziel"];
+
+# Ground Marker Position Rondel - lat,lon,alt in meter
+var wp2bo = [48.85034821,10.33039495,617.0,"Steilkurve"];
+
 var pa = "TT";
 var sectors = sectors_tt = [wp1tt, wp2tt, wp3tt, wp4tt, wp5tt, wp6tt];
 var sectors_s100 = [wp1s, wp2s, wp3s];
@@ -129,6 +137,7 @@ var sectors_kal = [wp1kal, wp2kal, wp3kal];
 var sectors_hd = [wp1hd, wp2hd];
 var sectors_cc = [wp1cc, wp2cc];
 var sectors_ct = [wp1ct, wp2ct, wp3ct];
+var sectors_bo = [wp1bo, wp2bo];
 
 ############################ helper for view ####################################
 var show_helper = func(s) {
@@ -331,6 +340,9 @@ var find_marker = func{
 	
 	marker_wp_pos.set_latlon(wp1ct[0], wp1ct[1], wp1ct[2]);
 	var dis_to_CT = marker_wp_pos.distance_to(mypos);
+	
+	marker_wp_pos.set_latlon(wp1bo[0], wp1bo[1]);
+	var dis_to_BO = marker_wp_pos.distance_to(mypos);
 		
 	if(dis_to_TT < 10000){   # if we are far away - 10km - from the Isle of Man stop script
 		#print("We are on the Isle of Man");
@@ -368,6 +380,10 @@ var find_marker = func{
 		#print("Terlicko - Czech");
 		sectors = sectors_ct;
 		pa = "CT";
+	}else if(dis_to_BO < 10000){
+		#print("Bopfingen - Germany");
+		sectors = sectors_bo;
+		pa = "BO";
 	}
 
 	# newbies have red jackets

@@ -31,7 +31,7 @@ var looptime = 0.1;
 var minrpm = 2200;
 var maxrpm = 18500;
 var clutchrpm = 0;
-var maxhealth = 60; # for the engine killing, higher is longer live while overspeed rpm
+var maxhealth = 120; # for the engine killing, higher is longer live while overspeed rpm
 var speedlimiter = props.globals.getNode("/instrumentation/Suzuki-GSX-R/speed-indicator/speed-limiter");
 var speedlimstate = props.globals.getNode("/instrumentation/Suzuki-GSX-R/speed-indicator/speed-limiter-switch");
 var speed = 0;
@@ -116,7 +116,7 @@ var loop = func {
 		#inertia = (fuel_weight.getValue() + weight.getValue())/245; # 245 max. weight and fuel
 
  		# overgspeed the engine
- 		if(rpm.getValue() > (maxrpm - 500)){
+ 		if(rpm.getValue() > maxrpm ){
  			killed.setValue(killed.getValue() + 1/maxhealth);
  			if(killed.getValue() >= 1)rpm.setValue(40000);
  		}
@@ -132,22 +132,22 @@ var loop = func {
 			vmax = 0;
 			fastcircuit.setValue(0);
 		} else if (gear.getValue() == 1) {
-			vmax = 50;
+			vmax = 73;
 			fastcircuit.setValue(0.1);
 		} else if (gear.getValue() == 2) {
-			vmax =  70;
+			vmax =  96;
 			fastcircuit.setValue(0.2);
 		} else if (gear.getValue() == 3) {
-			vmax = 100;
+			vmax = 120;
 			fastcircuit.setValue(0.3);
 		} else if (gear.getValue() == 4) {
-			vmax = 130;
+			vmax = 150;
 			fastcircuit.setValue(0.4);
 		} else if (gear.getValue() == 5) {
-			vmax = 160;
+			vmax = 180;
 			fastcircuit.setValue(0.5);
 		} else if (gear.getValue() == 6) {
-			vmax = 186;
+			vmax = 210;
 			fastcircuit.setValue(0.6);
 		}
 
@@ -163,6 +163,8 @@ var loop = func {
 			  transmissionpower = 0.65*throttle.getValue()-propulsion.getValue()/maxrpm;
 			  setprop("/sim/weight[1]/weight-lb", 0);
 			}
+			
+			transmissionpower = transmissionpower * (1- killed.getValue());
 			propulsion.setValue(transmissionpower);
 			
 			newrpm = (gspeed < 20 and throttle.getValue() > 0.1) ? throttle.getValue()*(maxrpm+2700) : (maxrpm+1500)/vmax*gspeed;

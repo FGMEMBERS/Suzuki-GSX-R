@@ -58,9 +58,16 @@
 
   <thruster 
     x="0.6" y="0" z="-0.21"
-    thrust="2010"
+    thrust="2100"
     vx="1" vy="0" vz="0">
     <control-input axis="/engines/engine/propulsion" control="THROTTLE"/>
+  </thruster>
+
+  <thruster 
+    x="2" y="0" z="0"
+    thrust="1550"
+    vx="1" vy="0" vz="0">
+    <control-input axis="/controls/gear/brake-front" control="THROTTLE" src0="0" src1="1" dst0="0" dst1="-1"/>
   </thruster>
 
   <tank x="0.38" y="0" z="0.53" capacity="31"/>
@@ -75,7 +82,7 @@
 			damp="6.2">
           <control-input axis="/controls/gear/brake-parking" control="BRAKE"/> 
           <control-input axis="/controls/gear/brake-left" control="BRAKE"/>
-          <control-input axis="/surface-positions/left-aileron-pos-norm" control="STEER" square="true" src0="-1.0" src1="1.0" dst0="-0.4" dst1="0.4"/>
+          <control-input axis="/surface-positions/left-aileron-pos-norm" control="STEER" square="true" src0="-1.0" src1="1.0" dst0="-1.0" dst1="1.0"/>
       	  <control-input axis="/surface-positions/rudder-pos-norm" control="STEER" square="true" src0="-1.0" src1="1.0" dst0="-0.8" dst1="0.8"/>
     </gear>
 
@@ -90,7 +97,7 @@
           <control-input axis="/engines/engine[0]/brake-engine" control="BRAKE"/>  
           <control-input axis="/controls/gear/brake-parking" control="BRAKE"/>
           <control-input axis="/controls/gear/brake-right" control="BRAKE"/>
-          <control-input axis="/surface-positions/left-aileron-pos-norm" control="STEER" square="true" src0="-1.0" src1="1.0" dst0="0.4" dst1="-0.4"/>
+          <control-input axis="/surface-positions/left-aileron-pos-norm" control="STEER" square="true" src0="-1.0" src1="1.0" dst0="1.0" dst1="-1.0"/>
     </gear>
 	
     <!-- support wheel left -->
@@ -103,7 +110,7 @@
 			damp="6.2">
           <control-input axis="/engines/engine[0]/brake-engine" control="BRAKE"/> 
           <control-input axis="/controls/gear/brake-right" control="BRAKE"/> 
-          <control-input axis="/surface-positions/left-aileron-pos-norm" control="STEER" square="true" src0="-1.0" src1="1.0" dst0="-0.4" dst1="0.4"/>
+          <control-input axis="/surface-positions/left-aileron-pos-norm" control="STEER" square="true" src0="-1.0" src1="1.0" dst0="-1.0" dst1="1.0"/>
        	<control-input axis="/surface-positions/rudder-pos-norm" control="STEER" square="true" src0="-1.0" src1="1.0" dst0="-0.8" dst1="0.8"/> 
      </gear>
 
@@ -117,7 +124,7 @@
 			damp="6.2">
           <control-input axis="/engines/engine[0]/brake-engine" control="BRAKE"/> 
           <control-input axis="/controls/gear/brake-right" control="BRAKE"/> 
-          <control-input axis="/surface-positions/left-aileron-pos-norm" control="STEER" square="true" src0="-1.0" src1="1.0" dst0="-0.4" dst1="0.4"/>
+          <control-input axis="/surface-positions/left-aileron-pos-norm" control="STEER" square="true" src0="-1.0" src1="1.0" dst0="-1.0" dst1="1.0"/>
        	<control-input axis="/surface-positions/rudder-pos-norm" control="STEER" square="true" src0="-1.0" src1="1.0" dst0="-0.8" dst1="0.8"/>
      </gear>
   
