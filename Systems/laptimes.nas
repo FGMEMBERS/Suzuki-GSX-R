@@ -121,10 +121,10 @@ var wp3ct = [49.77349913,18.48491256,314.0,"Sady"];
 
 ##### Germany - Bopfingen
 
-# Ground Marker Position Start/Finish - lat,lon,alt in meter
-var wp1bo = [48.85190347,10.33299092,614.0,"Start/Ziel"];
+# Ground Marker Position Start/Ziel - lat,lon,alt in meter
+var wp1bo = [48.85188861,10.33185324,614.0,"Start/Ziel"];
 
-# Ground Marker Position Rondel - lat,lon,alt in meter
+# Ground Marker Position Steilkurve - lat,lon,alt in meter
 var wp2bo = [48.85034821,10.33039495,617.0,"Steilkurve"];
 
 var pa = "TT";
