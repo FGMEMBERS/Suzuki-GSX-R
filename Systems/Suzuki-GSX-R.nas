@@ -4,6 +4,7 @@
 #		This file is licenced under the terms of the GNU General Public Licence V2 or later
 ###############################################################################################
 var config_dlg = gui.Dialog.new("/sim/gui/dialogs/config/dialog", getprop("/sim/aircraft-dir")~"/Systems/config.xml");
+var waiting = props.globals.initNode("/controls/waiting",0,"DOUBLE");
 
 ################## Little Help Window on bottom of screen #################
 var help_win = screen.window.new( 0, 0, 1, 5 );
@@ -12,6 +13,14 @@ help_win.fg = [1,1,1,1];
 var messenger = func{
 help_win.write(arg[0]);
 }
+
+var help_win_red = screen.window.new( 768, 512, 10, 5 );
+help_win_red.fg = [1,0,0,1];
+
+var messenger_red = func{
+help_win_red.write(arg[0]);
+}
+
 #----- view correction and steering helper ------
 # loop for fork control
 setprop("/controls/flight/fork",0.0);
@@ -238,19 +247,25 @@ setlistener("sim/model/start-idling", func()
  
   if (!b.getBoolValue() and k == 109)
    {
-   		setprop("/devices/status/keyboard/event/key",60); # overwrite the key event
-		setprop("sim/current-view/view-number", 1);
-   		shutdown();
-		setprop("/sim/presets/latitude-deg",getprop("/sim/input/click/latitude-deg"));
-		setprop("/sim/presets/longitude-deg", getprop("/sim/input/click/longitude-deg"));
-		setprop("/sim/presets/altitude-ft", getprop("/sim/input/click/elevation-ft"));
-		setprop("/controls/gear/gear-down", 1);
-		setprop("/surface-positions/left-aileron-pos-norm", 0);
-		setprop("/surface-positions/right-aileron-pos-norm", 0);
-		setprop("sim/current-view/view-number", 0);
-		
-		fgcommand("reposition");
+   		if( !waiting.getValue() ){
+			setprop("/controls/waiting", 1);
+			setprop("/devices/status/keyboard/event/key",60); # overwrite the key event
+			setprop("sim/current-view/view-number", 1);
+			shutdown();
+			setprop("/sim/presets/latitude-deg",getprop("/sim/input/click/latitude-deg"));
+			setprop("/sim/presets/longitude-deg", getprop("/sim/input/click/longitude-deg"));
+			setprop("/sim/presets/altitude-ft", getprop("/sim/input/click/elevation-ft"));
+			setprop("/controls/gear/gear-down", 1);
+			setprop("/surface-positions/left-aileron-pos-norm", 0);
+			setprop("/surface-positions/right-aileron-pos-norm", 0);
+			setprop("sim/current-view/view-number", 0);
+	
+			fgcommand("reposition");
 
-		help_win.write("Is everything ok with you?");
+			help_win_red.write("Is everything ok with you?");
+		}else{
+			help_win_red.write("5 SECONDS WAITING FOR REPLACEMENT!");
+			settimer(func{setprop("/controls/waiting", 0)}, 5);
+		}
    }
   }, 1, 1);
