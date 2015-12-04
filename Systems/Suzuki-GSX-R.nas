@@ -262,10 +262,13 @@ setlistener("sim/model/start-idling", func()
 	
 			fgcommand("reposition");
 
+			# after restart set level
+			settimer(func{setprop("consumables/fuel/tank/level-m3", getprop("/controls/fuel/remember-level"))},0.1);
+
 			help_win_red.write("Is everything ok with you?");
 		}else{
 			help_win_red.write("5 SECONDS WAITING FOR REPLACEMENT!");
-			settimer(func{setprop("/controls/waiting", 0)}, 5);
+			settimer(func{setprop("/controls/waiting", 0)}, 3);
 		}
    }
   }, 1, 1);

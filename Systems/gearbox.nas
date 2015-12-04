@@ -158,7 +158,7 @@ var loop = func {
 			  setprop("/sim/weight[1]/weight-lb", throttle.getValue()*300);
 			}else if(fastcircuit.getValue() == 0.2){
 			  transmissionpower = 0.9*throttle.getValue()-propulsion.getValue()/maxrpm;
-			  setprop("/sim/weight[1]/weight-lb", throttle.getValue()*60);
+			  setprop("/sim/weight[1]/weight-lb", throttle.getValue()*200);
 			}else{
 			  transmissionpower = 0.65*throttle.getValue()-propulsion.getValue()/maxrpm;
 			  setprop("/sim/weight[1]/weight-lb", 0);
@@ -218,12 +218,13 @@ var loop = func {
 
 	   	 if(rpm.getValue() < minrpm) rpm.setValue(minrpm);  # place after the rpm calculation
 	 
-	   	 if (fuel.getValue() < 0.0000015) {
+	   	 if (fuel.getValue() < 0.000002) {
 	   	  running.setValue(0);
 	   	  }
 	   	 else {
 	   	  fuel_lev = fuel.getValue();
-	   	  fuel.setValue(fuel_lev - (0.5*throttle.getValue()+0.3)*0.0000015);  # +0.1 consumption on idle rpm
+		  setprop("/controls/fuel/remember-level", fuel.getValue()); # save it for restart
+	   	  fuel.setValue(fuel_lev - (throttle.getValue()+0.1)*0.0000016);
 	   	 }
 		 
 		 #-------------- ENGINE RUNNING END --------------------
