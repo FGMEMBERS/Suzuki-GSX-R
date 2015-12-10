@@ -100,6 +100,14 @@ var wp1hd = [-37.35664293,175.07731681,20,"Start/Finish"];
 # Ground Marker Position S-Bend - lat,lon,alt in meter
 var wp2hd = [-37.35426269,175.07525481,15.0,"S-Bend"];
 
+##### New Zealand - Manfeild
+
+# Ground Marker Position Start/Finish - lat,lon,alt in meter
+var wp1mf = [-40.23612566,175.5590362,20,"Start/Finish"];
+
+# Ground Marker Position  2nd turn - lat,lon,alt in meter
+var wp2mf = [-40.23629096,175.555017,15.0,"2nd turn"];
+
 ##### New Zealand - Wanganui - Cimetery Circuit
 
 # Ground Marker Position Start/Finish - lat,lon,alt in meter
@@ -135,6 +143,7 @@ var sectors_ugp = [wp1ugp, wp2ugp];
 var sectors_mgp = [wp1mgp, wp2mgp, wp3mgp];
 var sectors_kal = [wp1kal, wp2kal, wp3kal];
 var sectors_hd = [wp1hd, wp2hd];
+var sectors_mf = [wp1mf, wp2mf];
 var sectors_cc = [wp1cc, wp2cc];
 var sectors_ct = [wp1ct, wp2ct, wp3ct];
 var sectors_bo = [wp1bo, wp2bo];
@@ -274,8 +283,9 @@ var show_lap_and_sector_time = func{
 
 		if(racelap.getValue() > 0){
 			var race_win = screen.window.new( winpos + 15, -20, 2, 1.1 );
-			race_win.fg = [1,1,1,1];
-			race_win.write("# "~racelap.getValue()~".# "~show_helper(lapt));
+			race_win.fg = [1,1,1,1];			
+			var thislapismy = racelap.getValue() - 1;
+			race_win.write("# "~thislapismy~".# "~show_helper(lapt));
 			if(show_l_or_f){
 				race_win.write("["~show_helper(fl)~"]");
 			}else{
@@ -335,6 +345,9 @@ var find_marker = func{
 	marker_wp_pos.set_latlon(wp1hd[0], wp1hd[1]);
 	var dis_to_HD = marker_wp_pos.distance_to(mypos);
 	
+	marker_wp_pos.set_latlon(wp1mf[0], wp1mf[1]);
+	var dis_to_MF = marker_wp_pos.distance_to(mypos);
+	
 	marker_wp_pos.set_latlon(wp1cc[0], wp1cc[1]);
 	var dis_to_CC = marker_wp_pos.distance_to(mypos);
 	
@@ -372,6 +385,10 @@ var find_marker = func{
 		#print("Hampton Downs Welcome");
 		sectors = sectors_hd;
 		pa = "HD";
+	}else if(dis_to_MF < 10000){
+		#print("Manfeild - New Zealand");
+		sectors = sectors_mf;
+		pa = "MF";
 	}else if(dis_to_CC < 10000){
 		#print("Wanganui - Cimetery Circuit - New Zealand");
 		sectors = sectors_cc;

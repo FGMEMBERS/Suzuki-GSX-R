@@ -153,6 +153,22 @@
   	  <group>
   	    <layout>hbox</layout>
   	    <text>
+  	      <label>New Zealand - Manfeild (NZPM)  ............................................... </label>
+  	      <halign>left</halign>
+  	    </text>
+  	    <input>
+  	      <property>/Suzuki-GSX-R/MF/race-laps</property>
+  	      <type>INTEGER</type>
+  	    </input>
+  	    <text>
+  	      <label>laps</label>
+  	      <halign>right</halign>
+  	    </text>
+  	  </group>
+
+  	  <group>
+  	    <layout>hbox</layout>
+  	    <text>
   	      <label>New Zealand - Wanganui - Cemetery Circuit (NZWU)  ....... </label>
   	      <halign>left</halign>
   	    </text>
