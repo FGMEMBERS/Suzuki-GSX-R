@@ -103,7 +103,7 @@ var wp2hd = [-37.35426269,175.07525481,15.0,"S-Bend"];
 ##### New Zealand - Manfeild
 
 # Ground Marker Position Start/Finish - lat,lon,alt in meter
-var wp1mf = [-40.23612566,175.5590362,20,"Start/Finish"];
+var wp1mf = [-40.23611944,175.55900933,64,"Start/Finish"];
 
 # Ground Marker Position  2nd turn - lat,lon,alt in meter
 var wp2mf = [-40.23629096,175.555017,15.0,"2nd turn"];
