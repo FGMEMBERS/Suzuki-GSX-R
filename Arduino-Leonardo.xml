@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+  <name type="string">Arduino Leonardo</name>
+  <axis n="2">
+    <desc type="string">Aileron</desc>
+      <dead-band type="double">0.1</dead-band>
+    <binding>
+      <command type="string">property-scale</command>
+      <property type="string">/controls/flight/aileron</property>
+      <factor type="double">1</factor>
+      <offset type="double">0</offset>
+    </binding>
+  </axis>
+  <axis n="3">
+    <desc type="string">Brake Left</desc>
+    <binding>
+      <command type="string">property-scale</command>
+      <property type="string">/controls/gear/brake-left</property>
+      <factor type="double">1.7</factor>
+      <offset type="double">0</offset>
+    </binding>
+  </axis>
+  <axis n="4">
+    <desc type="string">Throttle</desc>
+    <binding>
+      <command type="string">property-scale</command>
+      <property type="string">/controls/flight/throttle-input</property>
+      <factor type="double">1</factor>
+      <offset type="double">0</offset>
+    </binding>
+    <low>
+      <binding type="string">
+      </binding>
+    </low>
+  </axis>
+  <button>
+    <desc type="string">Brakes</desc>
+    <repeatable type="string">false</repeatable>
+    <binding>
+      <command type="string">nasal</command>
+      <script type="string">controls.applyBrakes(1);</script>
+    </binding>
+    <mod-up>
+      <binding>
+        <command type="string">nasal</command>
+        <script type="string">controls.applyBrakes(0);</script>
+      </binding>
+    </mod-up>
+  </button>
+  <button n="1">
+    <desc type="string">Elevator Trim Down</desc>
+    <binding>
+      <command type="string">nasal</command>
+      <script type="string">controls.elevatorTrim(1);</script>
+    </binding>
+    <repeatable type="double">1</repeatable>
+  </button>
+  <button n="2">
+    <desc type="string">Elevator Trim Up</desc>
+    <binding>
+      <command type="string">nasal</command>
+      <script type="string">controls.elevatorTrim(-1);</script>
+    </binding>
+    <repeatable type="double">1</repeatable>
+  </button>
+</PropertyList>

@@ -30,7 +30,8 @@ var forkcontrol = func{
     var r = getprop("/controls/flight/rudder") or 0;
 	var ms = getprop("/devices/status/mice/mouse/mode") or 0;
 	var bl = getprop("/controls/gear/brake-left") or 0;
-	var bs = getprop("/instrumentation/airspeed-indicator/indicated-speed-kt") or 0;
+	var bwsp= getprop("/gear/gear[1]/rollspeed-ms") or 0;
+	bwsp = bwsp*2.23694; # meter per secondes to miles per hour
 	if (ms == 1) {
 		if(getprop("/devices/status/mice/mouse/button")==1){
 			f.setValue(r);
@@ -38,12 +39,12 @@ var forkcontrol = func{
 	}else{
 		f.setValue(r);
 	}
-	if(bs > 40){
-		setprop("/controls/gear/brake-front", bl);
+	if(bwsp > 2){
+		setprop("/controls/gear/brake-front", bl*2);
 	}else{
 		setprop("/controls/gear/brake-front", 0);
 	}
-	settimer(forkcontrol, 0.05);
+	settimer(forkcontrol, 0);
 };
 
 forkcontrol();
@@ -96,9 +97,11 @@ setlistener("/controls/flight/aileron", func (position){
 		}
 		
 	}else{
-		var np = math.round(position*position*position*100);
-		np = np/100;
-		interpolate("/controls/flight/aileron-manual", np,0.07);
+		#var np = math.round(position*position*position*100);
+		#np = np/100;
+		#interpolate("/controls/flight/aileron-manual", np,0.07);
+		interpolate("/controls/flight/aileron-manual", position*5,0.2);
+		#setprop("/controls/flight/aileron-manual", position);
 	}
 });
 
@@ -128,7 +131,7 @@ setlistener("/controls/engines/engine[0]/throttle", func (position){
 	# helper for throtte on throttle axis or elevator
 	var ms = getprop("/devices/status/mice/mouse/mode") or 0;
 	var se = getprop("/controls/flight/select-throttle-input") or 0;
-	if (ms == 0 and se == 0 and position >= 0) setprop("/controls/flight/throttle-input", position);
+	if (ms == 0 and se == 0 and position >= 0) setprop("/controls/flight/throttle-input", position*2);
 });
 
 #----- speed meter selection ------
