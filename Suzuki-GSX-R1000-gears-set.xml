@@ -971,6 +971,7 @@ and have fun!</text>
 		<fuel>
 			<remember-level type="float">0.0</remember-level>
 		</fuel>
+		<waiting type="int">1</waiting>
 	</controls>
  
 	<instrumentation>
