@@ -252,7 +252,28 @@
 		<value>0.2</value>
       </greater-than>
     </condition>
-  </animation>
+  </animation>  
+  
+  <model>
+	<name>REARLIGHT</name>
+    <path>Aircraft/Suzuki-GSX-R/Models/Lights/rearlight.xml</path>
+    <offsets>
+      <x-m>1.0 </x-m>
+      <y-m>  0.0 </y-m>
+      <z-m>0.98 </z-m>
+    </offsets>
+  </model>
+  
+<animation>
+  <type>select</type>
+  <object-name>REARLIGHT</object-name>
+  <condition>
+	<greater-than>
+ 		<property>/sim/time/sun-angle-rad</property>
+		<value>1.4</value>
+	</greater-than>
+ </condition>
+</animation>
    
   <!-- Driver -->
   	<model>
@@ -297,6 +318,7 @@
       <object-name>SI</object-name>
       <object-name>SL</object-name>
       <object-name>TRANSPONDER</object-name>
+      <object-name>REARLIGHT</object-name>
       <object-name>Driver</object-name>
       <object-name>Driver_quick_glance_over_shoulder</object-name>
       <object-name>carrd</object-name>

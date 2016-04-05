@@ -197,6 +197,38 @@
   	      <halign>right</halign>
   	    </text>
   	  </group>
+
+  	  <group>
+  	    <layout>hbox</layout>
+  	    <text>
+  	      <label>Qatar - Losail Circuit (OTBK) .........................................................</label>
+  	      <halign>left</halign>
+  	    </text>
+  	    <input>
+  	      <property>/BMW-S-RR/QA/race-laps</property>
+  	      <type>INTEGER</type>
+  	    </input>
+  	    <text>
+  	      <label>laps</label>
+  	      <halign>right</halign>
+  	    </text>
+  	  </group>	
+
+  	  <group>
+  	    <layout>hbox</layout>
+  	    <text>
+  	      <label>Argentina - Termas de Rio Hondo (SANR) .................................</label>
+  	      <halign>left</halign>
+  	    </text>
+  	    <input>
+  	      <property>/BMW-S-RR/TE/race-laps</property>
+  	      <type>INTEGER</type>
+  	    </input>
+  	    <text>
+  	      <label>laps</label>
+  	      <halign>right</halign>
+  	    </text>
+  	  </group>	
 	  
   	  <group>
   	    <layout>hbox</layout>
