@@ -177,6 +177,20 @@ var wp3ca = [30.13847099,-97.62857221,161,"Sector3"];
 # Ground Marker Sector4 - lat,lon,alt in meter
 var wp4ca = [30.13629343,-97.63800251,163,"Sector4"];
 
+##### Circuito de Jerez - Spain 
+
+# Ground Marker Position FINISH - lat,lon,alt in meter
+var wp1je = [36.70996087,-6.03267415,42,"Sector1"];
+
+# Ground Marker Sector2 - lat,lon,alt in meter
+var wp2je = [36.70922328,-6.02891443,42,"Sector2"];
+
+# Ground Marker Sector3 - lat,lon,alt in meter
+var wp3je = [36.70524772,-6.03108757,42,"Sector3"];
+
+# Ground Marker Sector4 - lat,lon,alt in meter
+var wp4je = [36.70638683,-6.03768655,42,"Sector4"];
+
 var pa = "TT";
 var sectors = sectors_tt = [wp1tt, wp2tt, wp3tt, wp4tt, wp5tt, wp6tt];
 var sectors_s100 = [wp1s, wp2s, wp3s];
@@ -192,6 +206,7 @@ var sectors_bo = [wp1bo, wp2bo];
 var sectors_qa = [wp1qa, wp2qa, wp3qa, wp4qa];
 var sectors_te = [wp1te, wp2te, wp3te, wp4te];
 var sectors_ca = [wp1ca, wp2ca, wp3ca, wp4ca];
+var sectors_je = [wp1je, wp2je, wp3je, wp4je];
 
 ############################ helper for view ####################################
 var show_helper = func(s) {
@@ -410,6 +425,9 @@ var find_marker = func{
 	
 	marker_wp_pos.set_latlon(wp1ca[0], wp1ca[1], wp1ca[2], wp1ca[3]);
 	var dis_to_CA = marker_wp_pos.distance_to(mypos);
+	
+	marker_wp_pos.set_latlon(wp1je[0], wp1je[1], wp1je[2], wp1je[3]);
+	var dis_to_JE = marker_wp_pos.distance_to(mypos);
 		
 	if(dis_to_TT < 10000){   # if we are far away - 10km - from the Isle of Man stop script
 		#print("We are on the Isle of Man");
@@ -467,6 +485,10 @@ var find_marker = func{
 		#print("Texas - Circuit of the Americas");
 		sectors = sectors_ca;
 		pa = "CA";
+	}else if(dis_to_JE < 10000){
+		#print("Spain - Circuito de Jerez");
+		sectors = sectors_je;
+		pa = "JE";
 	}
 
 	# newbies have red jackets
