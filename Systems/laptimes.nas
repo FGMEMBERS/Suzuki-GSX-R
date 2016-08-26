@@ -191,6 +191,20 @@ var wp3je = [36.70524772,-6.03108757,42,"Sector3"];
 # Ground Marker Sector4 - lat,lon,alt in meter
 var wp4je = [36.70638683,-6.03768655,42,"Sector4"];
 
+##### Automotodrom Brno - Czech 
+
+# Ground Marker Position FINISH - lat,lon,alt in meter
+var wp1bc = [49.20290657,16.44499429,452,"Sector1"];
+
+# Ground Marker Sector2 - lat,lon,alt in meter
+var wp2bc = [49.20774160,16.45014994,452,"Sector2"];
+
+# Ground Marker Sector3 - lat,lon,alt in meter
+var wp3bc = [49.20627228,16.45901910,452,"Sector3"];
+
+# Ground Marker Sector4 - lat,lon,alt in meter
+var wp4bc = [49.20191995,16.45775951,452,"Sector4"];
+
 var pa = "TT";
 var sectors = sectors_tt = [wp1tt, wp2tt, wp3tt, wp4tt, wp5tt, wp6tt];
 var sectors_s100 = [wp1s, wp2s, wp3s];
@@ -207,6 +221,7 @@ var sectors_qa = [wp1qa, wp2qa, wp3qa, wp4qa];
 var sectors_te = [wp1te, wp2te, wp3te, wp4te];
 var sectors_ca = [wp1ca, wp2ca, wp3ca, wp4ca];
 var sectors_je = [wp1je, wp2je, wp3je, wp4je];
+var sectors_bc = [wp1bc, wp2bc, wp3bc, wp4bc];
 
 ############################ helper for view ####################################
 var show_helper = func(s) {
@@ -405,11 +420,11 @@ var find_marker = func{
 	marker_wp_pos.set_latlon(wp1hd[0], wp1hd[1]);
 	var dis_to_HD = marker_wp_pos.distance_to(mypos);
 	
-	marker_wp_pos.set_latlon(wp1mf[0], wp1mf[1]);
-	var dis_to_MF = marker_wp_pos.distance_to(mypos);
-	
 	marker_wp_pos.set_latlon(wp1cc[0], wp1cc[1]);
 	var dis_to_CC = marker_wp_pos.distance_to(mypos);
+	
+	marker_wp_pos.set_latlon(wp1mf[0], wp1mf[1]);
+	var dis_to_MF = marker_wp_pos.distance_to(mypos);
 	
 	marker_wp_pos.set_latlon(wp1ct[0], wp1ct[1], wp1ct[2]);
 	var dis_to_CT = marker_wp_pos.distance_to(mypos);
@@ -428,6 +443,9 @@ var find_marker = func{
 	
 	marker_wp_pos.set_latlon(wp1je[0], wp1je[1], wp1je[2], wp1je[3]);
 	var dis_to_JE = marker_wp_pos.distance_to(mypos);
+	
+	marker_wp_pos.set_latlon(wp1bc[0], wp1bc[1], wp1bc[2], wp1bc[3]);
+	var dis_to_BC = marker_wp_pos.distance_to(mypos);
 		
 	if(dis_to_TT < 10000){   # if we are far away - 10km - from the Isle of Man stop script
 		#print("We are on the Isle of Man");
@@ -489,6 +507,10 @@ var find_marker = func{
 		#print("Spain - Circuito de Jerez");
 		sectors = sectors_je;
 		pa = "JE";
+	}else if(dis_to_BC < 10000){
+		#print("Czech - Automotodrom Brno");
+		sectors = sectors_bc;
+		pa = "BC";
 	}
 
 	# newbies have red jackets
